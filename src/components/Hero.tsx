@@ -90,7 +90,7 @@ const Hero = () => {
               View projects
             </a>
             <a
-              href="/resume.pdf"
+              href="/resume-2025-01-15.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
