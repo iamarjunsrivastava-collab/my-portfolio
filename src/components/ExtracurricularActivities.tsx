@@ -11,7 +11,12 @@ const ExtracurricularActivities = () => {
     {
       title: "Campus Mantri | GeeksforGeeks",
       organization: "GeeksforGeeks",
-      description: "Appointed as Campus Mantri (Official Representative) of GeeksforGeeks for United University Prayagraj. Serve as the primary point of contact between GeeksforGeeks and the student community, promoting tech initiatives, organizing campus-level events and activities, and acting as a brand ambassador to increase student engagement with educational resources and platforms.",
+      description: [
+        "Appointed as Campus Mantri (Official Representative) of GeeksforGeeks for United University Prayagraj",
+        "Serve as the primary point of contact between GeeksforGeeks and the student community",
+        "Promoting tech initiatives, organizing campus-level events and activities",
+        "Acting as a brand ambassador to increase student engagement with educational resources and platforms"
+      ],
       type: "Leadership",
       date: "2026",
       icon: Users,
@@ -19,7 +24,11 @@ const ExtracurricularActivities = () => {
     {
       title: "Campus Ambassador | Entrepreneurship Development Cell (eDC), IIT Delhi",
       organization: "IIT Delhi",
-      description: "Selected as Campus Ambassador (2025–26) representing Entrepreneurship Development Cell, IIT Delhi. Promoted entrepreneurship initiatives and events through campus and digital outreach, strengthening leadership and communication skills.",
+      description: [
+        "Selected as Campus Ambassador (2025–26) representing Entrepreneurship Development Cell, IIT Delhi",
+        "Promoted entrepreneurship initiatives and events through campus and digital outreach",
+        "Strengthening leadership and communication skills"
+      ],
       type: "Leadership",
       date: "2025-26",
       icon: Users,
@@ -27,7 +36,12 @@ const ExtracurricularActivities = () => {
     {
       title: "Campus Ambassador for E-Summit'25",
       organization: "IIT Indore",
-      description: "Served as Campus Ambassador for E-Summit'25 organized by IIT Indore, contributing to student outreach and event promotion. Supported engagement and participation for a national-level entrepreneurship event held on August 30–31, 2025, enhancing leadership and communication skills.",
+      description: [
+        "Served as Campus Ambassador for E-Summit'25 organized by IIT Indore",
+        "Contributed to student outreach and event promotion",
+        "Supported engagement and participation for a national-level entrepreneurship event held on August 30–31, 2025",
+        "Enhancing leadership and communication skills"
+      ],
       type: "Leadership",
       date: "2025",
       icon: Users,
@@ -35,7 +49,12 @@ const ExtracurricularActivities = () => {
     {
       title: "Co-Organized HackDiwas 2.0",
       organization: "United University",
-      description: "Co-organised HackDiwas 2.0, a 2-day National Hackathon at United University, Prayagraj (May 1–2, 2025), coordinating planning and on-ground execution. Facilitated participation of 150+ students from multiple cities including Prayagraj, Kanpur, Delhi, Lucknow, and Varanasi, fostering innovation and real-world problem solving.",
+      description: [
+        "Co-organised HackDiwas 2.0, a 2-day National Hackathon at United University, Prayagraj (May 1–2, 2025)",
+        "Coordinating planning and on-ground execution",
+        "Facilitated participation of 150+ students from multiple cities including Prayagraj, Kanpur, Delhi, Lucknow, and Varanasi",
+        "Fostering innovation and real-world problem solving"
+      ],
       type: "Event Management",
       date: "2025",
       icon: Trophy,
@@ -102,9 +121,17 @@ const ExtracurricularActivities = () => {
                       </div>
                     </div>
                     
-                    <p className="text-muted-foreground leading-relaxed flex-1">
-                      {activity.description}
-                    </p>
+                    <div className="text-muted-foreground leading-relaxed flex-1">
+                      {Array.isArray(activity.description) ? (
+                        <ul className="list-disc list-inside space-y-2">
+                          {activity.description.map((point, idx) => (
+                            <li key={idx} className="text-sm">{point}</li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p>{activity.description}</p>
+                      )}
+                    </div>
                   </div>
                 </motion.div>
               );
