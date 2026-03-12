@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Award } from "lucide-react";
+import { Award, ExternalLink } from "lucide-react";
 
 const Certifications = () => {
   const ref = useRef(null);
@@ -12,26 +12,31 @@ const Certifications = () => {
       title: "Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate",
       issuer: "Oracle",
       date: "2025",
+      link: "https://drive.google.com/file/d/1Dgf-TOAgK1ALb0WjS3KECtbjnSs8KCzc/view?usp=drive_link",
     },
     {
       title: "Data Analytics Job Simulation",
       issuer: "Deloitte (via Forage)",
       date: "2024",
+      link: "https://drive.google.com/file/d/1GHyFybgPhrOCcN3wPemPN_jVWLYC4C_1/view?usp=drive_link",
     },
     {
       title: "Data Science",
       issuer: "Infosys",
       date: "2024",
+      link: "https://drive.google.com/file/d/15XVtDnLnr0F97aYUTIMtxe_QpakzH_ZI/view?usp=drive_link",
     },
     {
       title: "Data Analytics using Power BI Foundation",
       issuer: "Infosys",
       date: "2024",
+      link: "https://drive.google.com/file/d/14S8rwb8mnoog04HWjbUhamkYd7zWrxDi/view?usp=drive_link",
     },
     {
       title: "Cloud Technologies",
       issuer: "Infosys",
       date: "2024",
+      link: "https://drive.google.com/file/d/1lCyqazkXjb3wzRpvLYdqCB-eJ-tKl8Lx/view?usp=drive_link",
     },
   ];
 
@@ -80,7 +85,18 @@ const Certifications = () => {
                       {cert.title}
                     </h3>
                     <p className="text-xs text-muted-foreground mb-1">{cert.issuer}</p>
-                    <p className="text-xs text-primary font-medium">{cert.date}</p>
+                    <p className="text-xs text-primary font-medium mb-2">{cert.date}</p>
+                    {cert.link && (
+                      <a
+                        href={cert.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs text-primary hover:text-primary/80 transition-colors"
+                      >
+                        View Certificate
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    )}
                   </div>
                 </div>
               </motion.div>
