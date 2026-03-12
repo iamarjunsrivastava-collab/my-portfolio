@@ -107,7 +107,7 @@ const Contact = () => {
                 <div>
                   <p className="text-sm text-muted-foreground">Resume</p>
                   <a
-                    href="/resume.pdf"
+                    href="/Arjun_Srivastava_FlowCV_Resume_2026-03-12.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-foreground hover:text-primary transition-colors"
