@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { ExternalLink, Github, MessageSquare, BarChart3, Home } from "lucide-react";
+import { ExternalLink, Github, MessageSquare, BarChart3, Home, Users } from "lucide-react";
 
 const Projects = () => {
   const ref = useRef(null);
@@ -9,34 +9,56 @@ const Projects = () => {
 
   const projects = [
     {
-      title: "Chat Cleaner – Chat Classifier Extension",
-      period: "July 2025",
-      description:
-        "Developed a Chrome extension to capture and classify 100+ chat messages from Zoom, Meet, and MS Teams. Leveraged Sentence-BERT to semantically cluster messages, cutting question duplication by 70% per session. Integrated real-time toxicity detection, filtering out 95%+ of inappropriate or off-topic content before display.",
-      tags: ["Python", "Flask", "JavaScript", "Chrome Extension APIs", "HTML/CSS", "Hugging Face Transformers"],
+      title: "Chat Cleaner-NLP Chat Classification System",
+      period: "2025",
+      description: [
+        "Built an NLP based chat classification tool to analyze and filter live chat messages",
+        "Reduced duplicate messages by 70% using semantic similarity detection",
+        "Implemented toxicity detection models filtering 95%+ irrelevant content"
+      ],
+      tags: ["Python", "Sentence-BERT", "Flask", "Hugging Face"],
       icon: MessageSquare,
       github: "https://github.com/iamarjunsrivastava-collab/Chat-Cleaner---Chat-Classifier-Extension",
-      demo: "#",
+      demo: "",
     },
     {
-      title: "Sentiment Analysis Classifier",
-      period: "January 2025",
-      description:
-        "Implemented a sentiment analysis pipeline for 80,000+ Amazon reviews in the musical instrument category. Applied text cleaning, tokenization, and data balancing techniques, increasing model accuracy by 12%. Trained and compared 5 machine learning models, achieving an F1-score of 87% on the best-performing classifier.",
-      tags: ["Python", "Scikit-learn", "Pandas", "NLTK", "Matplotlib"],
+      title: "Sentiment Analysis on Amazon Reviews (80k+ Records)",
+      period: "2025",
+      description: [
+        "Developed a sentiment analysis pipeline processing 80,000+ product reviews",
+        "Applied text preprocessing, TF-IDF feature extraction, and ML model comparison",
+        "Achieved 87% F1-score after model optimization"
+      ],
+      tags: ["Python", "Pandas", "Scikit-learn", "NLP"],
       icon: BarChart3,
       github: "https://github.com/iamarjunsrivastava-collab/Sentiment-Analysis-Classifier",
-      demo: "#",
+      demo: "",
+    },
+    {
+      title: "Customer Churn Prediction & Retention Analysis",
+      period: "2025",
+      description: [
+        "Developed a customer churn prediction model using telecom customer datasets",
+        "Performed data preprocessing, exploratory data analysis, and feature engineering to identify churn drivers",
+        "Implemented classification models (Logistic Regression, Random Forest) achieving 85%+ accuracy"
+      ],
+      tags: ["Python", "SQL", "Scikit-learn", "Power BI"],
+      icon: Users,
+      github: "https://github.com/iamarjunsrivastava-collab/Customer-Churn-Prediction",
+      demo: "",
     },
     {
       title: "House Price Prediction",
-      period: "November 2025",
-      description:
-        "Developed a House Price Prediction system using Linear Regression trained on historical housing data with 8 key property features. Implemented a serverless backend for fast, real-time predictions along with confidence scores and model version tracking. Built an interactive web interface and visualization dashboard to display insights like average prices, property size stats, and dataset trends.",
+      period: "2025",
+      description: [
+        "Developed a House Price Prediction system using Linear Regression on historical housing data",
+        "Implemented serverless backend for real-time predictions with confidence scores",
+        "Built interactive web interface with visualization dashboard for property insights"
+      ],
       tags: ["Python", "Pandas", "Scikit-learn", "JavaScript", "HTML/CSS"],
       icon: Home,
       github: "https://github.com/iamarjunsrivastava-collab/House-Pricing-Prediction",
-      demo: "#",
+      demo: "",
     },
   ];
 
@@ -78,9 +100,17 @@ const Projects = () => {
                 {project.title}
               </h3>
 
-              <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-grow">
-                {project.description}
-              </p>
+              <div className="text-muted-foreground text-sm leading-relaxed mb-4 flex-grow">
+                {Array.isArray(project.description) ? (
+                  <ul className="list-disc list-inside space-y-1">
+                    {project.description.map((point, idx) => (
+                      <li key={idx}>{point}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>{project.description}</p>
+                )}
+              </div>
 
               <div className="flex flex-wrap gap-2 mb-6">
                 {project.tags.map((tag) => (
@@ -103,13 +133,17 @@ const Projects = () => {
                   <Github className="w-4 h-4" />
                   Code
                 </a>
-                <a
-                  href={project.demo}
-                  className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  Demo
-                </a>
+                {project.demo && (
+                  <a
+                    href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    Demo
+                  </a>
+                )}
               </div>
             </motion.article>
           ))}

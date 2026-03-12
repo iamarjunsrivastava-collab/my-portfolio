@@ -21,6 +21,18 @@ const Certifications = () => {
       link: "https://drive.google.com/file/d/1GHyFybgPhrOCcN3wPemPN_jVWLYC4C_1/view?usp=drive_link",
     },
     {
+      title: "Data Visualization Job Simulation",
+      issuer: "TATA (via Forage)",
+      date: "2024",
+      link: "https://drive.google.com/file/d/1Q6p_r0HIMVeMpmXrkH1JMoplZT7exbMK/view?usp=drive_link",
+    },
+    {
+      title: "Big Data",
+      issuer: "Infosys",
+      date: "2024",
+      link: "https://drive.google.com/file/d/1hG5sTPL03-b8Oeax71hkIJN1r68aCYVz/view?usp=drive_link",
+    },
+    {
       title: "Data Science",
       issuer: "Infosys",
       date: "2024",
