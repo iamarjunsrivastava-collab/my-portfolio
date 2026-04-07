@@ -18,18 +18,24 @@ const languages = [
 ];
 
 const triggerGoogleTranslate = (langCode: string) => {
-  // If English, reload without translation cookie
-  if (langCode === "en") {
-    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + window.location.hostname;
-    window.location.reload();
-    return;
+  const hostname = window.location.hostname;
+
+  // Clear existing cookies first
+  const clearCookie = (name: string) => {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${hostname}`;
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${hostname}`;
+  };
+
+  clearCookie("googtrans");
+
+  if (langCode !== "en") {
+    const cookieValue = `/en/${langCode}`;
+    document.cookie = `googtrans=${cookieValue}; path=/`;
+    document.cookie = `googtrans=${cookieValue}; path=/; domain=${hostname}`;
+    document.cookie = `googtrans=${cookieValue}; path=/; domain=.${hostname}`;
   }
 
-  // Set the googtrans cookie and reload
-  const cookieValue = `/en/${langCode}`;
-  document.cookie = `googtrans=${cookieValue}; path=/`;
-  document.cookie = `googtrans=${cookieValue}; path=/; domain=${window.location.hostname}`;
   window.location.reload();
 };
 
