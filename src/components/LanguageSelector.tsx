@@ -17,10 +17,32 @@ const languages = [
   { code: "bn", label: "বাংলা" },
 ];
 
+const triggerGoogleTranslate = (langCode: string) => {
+  // If English, reload without translation cookie
+  if (langCode === "en") {
+    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + window.location.hostname;
+    window.location.reload();
+    return;
+  }
+
+  // Set the googtrans cookie and reload
+  const cookieValue = `/en/${langCode}`;
+  document.cookie = `googtrans=${cookieValue}; path=/`;
+  document.cookie = `googtrans=${cookieValue}; path=/; domain=${window.location.hostname}`;
+  window.location.reload();
+};
+
 const LanguageSelector = () => {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState("en");
   const ref = useRef<HTMLDivElement>(null);
+
+  // Detect current language from cookie on mount
+  useEffect(() => {
+    const match = document.cookie.match(/googtrans=\/en\/([^;]+)/);
+    if (match) setSelected(match[1]);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -35,13 +57,7 @@ const LanguageSelector = () => {
   const handleSelect = (code: string) => {
     setSelected(code);
     setOpen(false);
-
-    // Trigger Google Translate
-    const select = document.querySelector(".goog-te-combo") as HTMLSelectElement;
-    if (select) {
-      select.value = code;
-      select.dispatchEvent(new Event("change"));
-    }
+    triggerGoogleTranslate(code);
   };
 
   const current = languages.find((l) => l.code === selected);
@@ -59,7 +75,7 @@ const LanguageSelector = () => {
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full mt-2 w-40 rounded-xl border border-border bg-card shadow-xl z-50 overflow-hidden">
+        <div className="absolute right-0 top-full mt-2 w-40 rounded-xl border border-border bg-card shadow-xl z-50 overflow-hidden max-h-72 overflow-y-auto">
           {languages.map((lang) => (
             <button
               key={lang.code}
