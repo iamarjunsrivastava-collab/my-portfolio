@@ -3,9 +3,9 @@ import { ArrowDown, Github, Linkedin, Mail, Phone, FileText } from "lucide-react
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 bg-background">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_hsl(222_47%_12%)_0%,_hsl(222_47%_6%)_70%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_hsl(var(--secondary))_0%,_hsl(var(--background))_70%)]" />
       
       {/* Animated orbs */}
       <motion.div
