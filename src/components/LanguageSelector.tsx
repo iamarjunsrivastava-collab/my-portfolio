@@ -42,6 +42,28 @@ const LanguageSelector = () => {
     setSelected(code);
     setOpen(false);
 
+    if (code === "en") {
+      // Click Google Translate's "Show original" button
+      const restoreBtn = document.querySelector(".goog-te-menu-value") as HTMLElement;
+      if (restoreBtn) restoreBtn.click();
+
+      // Try the restore frame approach
+      const iframe = document.querySelector(".goog-te-banner-frame") as HTMLIFrameElement;
+      if (iframe) {
+        const innerDoc = iframe.contentDocument || iframe.contentWindow?.document;
+        const restoreEl = innerDoc?.querySelector(".goog-te-button button") as HTMLElement;
+        if (restoreEl) restoreEl.click();
+      }
+
+      // Fallback: reload page with cookie cleared
+      const hostname = window.location.hostname;
+      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
+      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${hostname}`;
+      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${hostname}`;
+      window.location.reload();
+      return;
+    }
+
     // Wait for Google Translate widget to be ready then trigger it
     const tryTranslate = (attempts = 0) => {
       const select = document.querySelector(".goog-te-combo") as HTMLSelectElement;
