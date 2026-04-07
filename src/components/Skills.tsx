@@ -58,7 +58,7 @@ const Skills = () => {
             <span className="italic font-normal text-primary">Technologies</span>
           </h2>
           <p className="text-muted-foreground">
-            The full arsenal I bring to every data challenge — from raw data to production-ready models.
+            The full arsenal I bring to every data challenge from raw data to production-ready models.
           </p>
         </motion.div>
 
