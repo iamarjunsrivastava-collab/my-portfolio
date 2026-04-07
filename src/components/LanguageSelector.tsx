@@ -17,38 +17,16 @@ const languages = [
   { code: "bn", label: "বাংলা" },
 ];
 
-const triggerGoogleTranslate = (langCode: string) => {
-  const hostname = window.location.hostname;
-
-  // Clear existing cookies first
-  const clearCookie = (name: string) => {
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${hostname}`;
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${hostname}`;
-  };
-
-  clearCookie("googtrans");
-
-  if (langCode !== "en") {
-    const cookieValue = `/en/${langCode}`;
-    document.cookie = `googtrans=${cookieValue}; path=/`;
-    document.cookie = `googtrans=${cookieValue}; path=/; domain=${hostname}`;
-    document.cookie = `googtrans=${cookieValue}; path=/; domain=.${hostname}`;
+declare global {
+  interface Window {
+    google: any;
   }
-
-  window.location.reload();
-};
+}
 
 const LanguageSelector = () => {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState("en");
   const ref = useRef<HTMLDivElement>(null);
-
-  // Detect current language from cookie on mount
-  useEffect(() => {
-    const match = document.cookie.match(/googtrans=\/en\/([^;]+)/);
-    if (match) setSelected(match[1]);
-  }, []);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -63,7 +41,18 @@ const LanguageSelector = () => {
   const handleSelect = (code: string) => {
     setSelected(code);
     setOpen(false);
-    triggerGoogleTranslate(code);
+
+    // Wait for Google Translate widget to be ready then trigger it
+    const tryTranslate = (attempts = 0) => {
+      const select = document.querySelector(".goog-te-combo") as HTMLSelectElement;
+      if (select) {
+        select.value = code;
+        select.dispatchEvent(new Event("change"));
+      } else if (attempts < 20) {
+        setTimeout(() => tryTranslate(attempts + 1), 300);
+      }
+    };
+    tryTranslate();
   };
 
   const current = languages.find((l) => l.code === selected);
