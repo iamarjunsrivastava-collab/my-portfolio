@@ -1,142 +1,127 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Trophy, Users, Calendar, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
+
+const activities = [
+  {
+    title: "Campus Mantri | GeeksforGeeks",
+    organization: "GeeksforGeeks · United University Prayagraj",
+    type: "Leadership",
+    date: "2026",
+    bullets: [
+      "Appointed as Official Representative of GFG for United University",
+      "Primary liaison between GeeksforGeeks and the student community",
+      "Organizing campus-level tech events and educational activities",
+      "Brand ambassador increasing student engagement with GFG resources",
+    ],
+  },
+  {
+    title: "Campus Ambassador | EDC, IIT Delhi",
+    organization: "Entrepreneurship Development Cell · IIT Delhi",
+    type: "Leadership",
+    date: "2025–26",
+    bullets: [
+      "Selected as Campus Ambassador representing eDC, IIT Delhi",
+      "Promoted entrepreneurship initiatives through campus and digital outreach",
+      "Strengthening leadership and communication skills at national level",
+    ],
+  },
+  {
+    title: "Campus Ambassador for E-Summit'25",
+    organization: "IIT Indore",
+    type: "Leadership",
+    date: "2025",
+    bullets: [
+      "Served as Campus Ambassador for E-Summit'25 organized by IIT Indore",
+      "Contributed to student outreach and event promotion at national scale",
+      "Supported national-level entrepreneurship event · Aug 30–31, 2025",
+    ],
+  },
+  {
+    title: "Co-Organized HackDiwas 2.0",
+    organization: "United University, Prayagraj",
+    type: "Event Management",
+    date: "2025",
+    bullets: [
+      "Co-organised 2-day National Hackathon (May 1–2, 2025)",
+      "Coordinated planning and on-ground execution end-to-end",
+      "Facilitated 150+ students from Prayagraj, Kanpur, Delhi, Lucknow, Varanasi",
+      "Fostered innovation and real-world problem solving culture",
+    ],
+  },
+];
 
 const ExtracurricularActivities = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const activities = [
-    {
-      title: "Campus Mantri | GeeksforGeeks",
-      organization: "GeeksforGeeks",
-      description: [
-        "Appointed as Campus Mantri (Official Representative) of GeeksforGeeks for United University Prayagraj",
-        "Serve as the primary point of contact between GeeksforGeeks and the student community",
-        "Promoting tech initiatives, organizing campus-level events and activities",
-        "Acting as a brand ambassador to increase student engagement with educational resources and platforms"
-      ],
-      type: "Leadership",
-      date: "2026",
-      icon: Users,
-    },
-    {
-      title: "Campus Ambassador | Entrepreneurship Development Cell (eDC), IIT Delhi",
-      organization: "IIT Delhi",
-      description: [
-        "Selected as Campus Ambassador (2025–26) representing Entrepreneurship Development Cell, IIT Delhi",
-        "Promoted entrepreneurship initiatives and events through campus and digital outreach",
-        "Strengthening leadership and communication skills"
-      ],
-      type: "Leadership",
-      date: "2025-26",
-      icon: Users,
-    },
-    {
-      title: "Campus Ambassador for E-Summit'25",
-      organization: "IIT Indore",
-      description: [
-        "Served as Campus Ambassador for E-Summit'25 organized by IIT Indore",
-        "Contributed to student outreach and event promotion",
-        "Supported engagement and participation for a national-level entrepreneurship event held on August 30–31, 2025",
-        "Enhancing leadership and communication skills"
-      ],
-      type: "Leadership",
-      date: "2025",
-      icon: Users,
-    },
-    {
-      title: "Co-Organized HackDiwas 2.0",
-      organization: "United University",
-      description: [
-        "Co-organised HackDiwas 2.0, a 2-day National Hackathon at United University, Prayagraj (May 1–2, 2025)",
-        "Coordinating planning and on-ground execution",
-        "Facilitated participation of 150+ students from multiple cities including Prayagraj, Kanpur, Delhi, Lucknow, and Varanasi",
-        "Fostering innovation and real-world problem solving"
-      ],
-      type: "Event Management",
-      date: "2025",
-      icon: Trophy,
-    },
-  ];
-
   return (
-    <section id="extracurricular" className="section-padding relative bg-muted/30">
+    <section id="extracurricular" className="section-padding relative">
       <div className="container px-6">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto text-center mb-16"
+          className="max-w-5xl mx-auto mb-12"
         >
-          <h2 className="text-sm font-medium text-primary uppercase tracking-wider mb-4">
-            Beyond Academics
+          {/* Label */}
+          <div className="flex items-center gap-3 mb-4">
+            <div className="h-px w-6 bg-primary" />
+            <span className="text-xs font-semibold text-primary uppercase tracking-widest">
+              Beyond Academics
+            </span>
+          </div>
+
+          {/* Heading */}
+          <h2 className="text-4xl md:text-5xl font-bold mb-3">
+            Extracurricular{" "}
+            <span className="italic font-normal text-primary">Activities</span>
           </h2>
-          <p className="text-3xl md:text-4xl font-bold">
-            Extracurricular <span className="gradient-text">Activities</span>
-          </p>
-          <p className="text-muted-foreground mt-4 text-lg">
-            Leadership roles and community involvement that shaped my journey
+          <p className="text-muted-foreground">
+            Leadership roles and community involvement that shaped my professional journey.
           </p>
         </motion.div>
 
-        <div className="max-w-6xl mx-auto">
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {activities.map((activity, index) => {
-              const IconComponent = activity.icon;
-              return (
-                <motion.div
-                  key={activity.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.2 + index * 0.2 }}
-                  className="group relative h-full"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
-                  <div className="relative h-full min-h-[320px] p-8 rounded-2xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 flex flex-col">
-                    <div className="flex items-start gap-4 mb-6">
-                      <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        <IconComponent className="w-7 h-7 text-primary" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full">
-                            {activity.type}
-                          </span>
-                          <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                            <Calendar className="w-3 h-3" />
-                            {activity.date}
-                          </div>
-                        </div>
-                        <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-                          {activity.title}
-                        </h3>
-                        <div className="flex items-center gap-1 text-sm text-muted-foreground mb-4">
-                          <MapPin className="w-4 h-4" />
-                          {activity.organization}
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="text-muted-foreground leading-relaxed flex-1">
-                      {Array.isArray(activity.description) ? (
-                        <ul className="list-disc list-inside space-y-2">
-                          {activity.description.map((point, idx) => (
-                            <li key={idx} className="text-sm">{point}</li>
-                          ))}
-                        </ul>
-                      ) : (
-                        <p>{activity.description}</p>
-                      )}
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
+        {/* Grid */}
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-6">
+          {activities.map((activity, index) => (
+            <motion.div
+              key={activity.title}
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
+              className="p-6 rounded-2xl bg-card border border-border hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300"
+            >
+              {/* Badge + date */}
+              <div className="flex items-center gap-2 mb-3">
+                <span className="px-3 py-1 text-xs font-semibold bg-primary/10 text-primary rounded-full uppercase tracking-wide">
+                  {activity.type}
+                </span>
+                <span className="text-xs text-muted-foreground">{activity.date}</span>
+              </div>
+
+              {/* Title */}
+              <h3 className="text-lg font-bold mb-1">{activity.title}</h3>
+
+              {/* Organization */}
+              <div className="flex items-center gap-1 text-sm text-muted-foreground mb-4">
+                <MapPin className="w-3 h-3 text-primary shrink-0" />
+                {activity.organization}
+              </div>
+
+              {/* Bullet points */}
+              <ul className="space-y-2">
+                {activity.bullets.map((bullet, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <span className="mt-2 w-1.5 h-1.5 rounded-full bg-primary/60 shrink-0" />
+                    {bullet}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
