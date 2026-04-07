@@ -1,0 +1,80 @@
+import { useState, useRef, useEffect } from "react";
+import { Globe, ChevronDown } from "lucide-react";
+
+const languages = [
+  { code: "en", label: "English" },
+  { code: "hi", label: "हिन्दी" },
+  { code: "zh-CN", label: "中文" },
+  { code: "ar", label: "العربية" },
+  { code: "fr", label: "Français" },
+  { code: "de", label: "Deutsch" },
+  { code: "es", label: "Español" },
+  { code: "ja", label: "日本語" },
+  { code: "ko", label: "한국어" },
+  { code: "pt", label: "Português" },
+  { code: "ru", label: "Русский" },
+  { code: "it", label: "Italiano" },
+  { code: "bn", label: "বাংলা" },
+];
+
+const LanguageSelector = () => {
+  const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState("en");
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleSelect = (code: string) => {
+    setSelected(code);
+    setOpen(false);
+
+    // Trigger Google Translate
+    const select = document.querySelector(".goog-te-combo") as HTMLSelectElement;
+    if (select) {
+      select.value = code;
+      select.dispatchEvent(new Event("change"));
+    }
+  };
+
+  const current = languages.find((l) => l.code === selected);
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        onClick={() => setOpen(!open)}
+        className="flex items-center gap-1.5 px-2.5 py-2 rounded-lg border border-border hover:border-primary/50 hover:bg-secondary transition-all duration-200 text-sm text-muted-foreground"
+        aria-label="Select language"
+      >
+        <Globe className="w-4 h-4" />
+        <span className="hidden sm:inline text-xs font-medium">{current?.label}</span>
+        <ChevronDown className={`w-3 h-3 transition-transform ${open ? "rotate-180" : ""}`} />
+      </button>
+
+      {open && (
+        <div className="absolute right-0 top-full mt-2 w-40 rounded-xl border border-border bg-card shadow-xl z-50 overflow-hidden">
+          {languages.map((lang) => (
+            <button
+              key={lang.code}
+              onClick={() => handleSelect(lang.code)}
+              className={`w-full text-left px-4 py-2.5 text-sm transition-colors hover:bg-secondary ${
+                selected === lang.code ? "text-primary font-medium bg-primary/5" : "text-muted-foreground"
+              }`}
+            >
+              {lang.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default LanguageSelector;

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Menu, X, Sun, Moon } from "lucide-react";
+import LanguageSelector from "./LanguageSelector";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -65,6 +66,7 @@ const Navbar = () => {
         </ul>
 
         <div className="hidden lg:flex items-center gap-2">
+          <LanguageSelector />
           <button
             onClick={toggleTheme}
             className="p-2 rounded-lg border border-border hover:border-primary/50 hover:bg-secondary transition-all duration-200"
@@ -82,6 +84,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <div className="lg:hidden flex items-center gap-2">
+          <LanguageSelector />
           <button
             onClick={toggleTheme}
             className="p-2 rounded-lg border border-border hover:border-primary/50 transition-all duration-200"

@@ -35,6 +35,17 @@
 
   <body>
     <div id="root"></div>
+    <!-- Google Translate -->
+    <div id="google_translate_element" style="display:none"></div>
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          { pageLanguage: 'en', includedLanguages: 'hi,zh-CN,ar,fr,de,es,ja,ko,pt,ru,it,bn', layout: google.translate.TranslateElement.InlineLayout.SIMPLE },
+          'google_translate_element'
+        );
+      }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
