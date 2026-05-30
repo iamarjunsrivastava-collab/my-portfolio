@@ -1,264 +1,215 @@
-/* ===================================================================
-   TAILWIND IMPORTS
-   =================================================================== */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ===================================================================
-   CSS CUSTOM PROPERTIES (DESIGN TOKENS)
-   =================================================================== */
 @layer base {
   :root {
-    /* Base Colors */
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
-
-    /* Card Colors */
-    --card: 222 47% 8%;
-    --card-foreground: 210 40% 98%;
-
-    /* Popover Colors */
-    --popover: 222 47% 8%;
-    --popover-foreground: 210 40% 98%;
-
-    /* Primary Colors */
-    --primary: 187 85% 53%;
-    --primary-foreground: 222 47% 6%;
-
-    /* Secondary Colors */
-    --secondary: 222 30% 14%;
-    --secondary-foreground: 210 40% 98%;
-
-    /* Muted Colors */
-    --muted: 222 30% 12%;
-    --muted-foreground: 215 20% 55%;
-
-    /* Accent Colors */
-    --accent: 187 85% 53%;
-    --accent-foreground: 222 47% 6%;
-
-    /* Destructive Colors */
+    --background: 45 40% 94%;
+    --foreground: 0 0% 10%;
+    --card: 45 40% 94%;
+    --card-foreground: 0 0% 10%;
+    --popover: 45 40% 94%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 45 95% 55%;
+    --primary-foreground: 0 0% 10%;
+    --secondary: 45 30% 88%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 45 20% 85%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 45 95% 55%;
+    --accent-foreground: 0 0% 10%;
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
-
-    /* Form & Border Colors */
-    --border: 222 30% 18%;
-    --input: 222 30% 18%;
-    --ring: 187 85% 53%;
-
-    /* Border Radius */
-    --radius: 0.75rem;
-
-    /* Custom Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(187 85% 53%) 0%, hsl(217 91% 60%) 100%);
-    --gradient-subtle: linear-gradient(135deg, hsl(222 47% 8%) 0%, hsl(222 47% 12%) 100%);
-    --gradient-radial: radial-gradient(ellipse at top, hsl(222 47% 12%) 0%, hsl(222 47% 6%) 70%);
-
-    /* Custom Shadows */
-    --shadow-glow: 0 0 60px -15px hsl(187 85% 53% / 0.3);
-    --shadow-card: 0 4px 24px -8px hsl(0 0% 0% / 0.4);
-  }
-
-  .dark {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
-  }
-
-  .light {
-    --background: 0 0% 98%;
-    --foreground: 222 47% 8%;
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 8%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 8%;
-    --primary: 187 85% 40%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 210 20% 92%;
-    --secondary-foreground: 222 47% 8%;
-    --muted: 210 20% 94%;
-    --muted-foreground: 215 20% 40%;
-    --accent: 187 85% 40%;
-    --accent-foreground: 0 0% 100%;
-    --border: 210 20% 85%;
-    --input: 210 20% 85%;
-    --ring: 187 85% 40%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 75%;
+    --input: 0 0% 75%;
+    --ring: 45 95% 55%;
+    --radius: 0.25rem;
   }
 }
 
-/* ===================================================================
-   BASE STYLES
-   =================================================================== */
 @layer base {
   * {
-    @apply border-border;
+    box-sizing: border-box;
   }
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 4rem;
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Inter', system-ui, sans-serif;
-    line-height: 1.6;
+    background-color: #f0ead6;
+    color: #1a1a1a;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    min-height: 100vh;
   }
 
   ::selection {
-    @apply bg-primary/30 text-foreground;
+    background: #f5c518;
+    color: #1a1a1a;
   }
 
-  /* Fix for mobile viewport height issues */
-  .min-h-screen {
-    min-height: 100vh;
-    min-height: 100dvh;
-  }
-
-  /* Ensure images are responsive */
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  /* Fix for button focus states */
-  button:focus-visible,
-  a:focus-visible {
-    outline: 2px solid hsl(var(--primary));
-    outline-offset: 2px;
+  a {
+    color: inherit;
+    text-decoration: none;
   }
 }
 
-/* ===================================================================
-   COMPONENT STYLES
-   =================================================================== */
-@layer components {
-  /* Text Effects */
-  .gradient-text {
-    @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-primary);
-  }
-
-  /* Border Effects */
-  .gradient-border {
-    position: relative;
-  }
-
-  .gradient-border::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    padding: 1px;
-    border-radius: inherit;
-    background: var(--gradient-primary);
-    -webkit-mask: 
-      linear-gradient(#fff 0 0) content-box, 
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask: 
-      linear-gradient(#fff 0 0) content-box, 
-      linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-    pointer-events: none;
-  }
-
-  /* Glass Morphism Effect */
-  .glass {
-    @apply bg-card/50 backdrop-blur-xl border border-border/50;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-  }
-
-  /* Layout Utilities */
-  .section-padding {
-    @apply py-16 md:py-24 lg:py-32;
-  }
-
-  /* Container improvements */
-  .container {
-    @apply mx-auto px-4 sm:px-6 lg:px-8;
-    max-width: 1200px;
-  }
-
-  /* Responsive text sizing */
-  .text-responsive-xl {
-    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
-  }
-
-  .text-responsive-lg {
-    @apply text-xl sm:text-2xl md:text-3xl;
-  }
-
-  /* Button improvements */
-  .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50;
-  }
-
-  .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-border hover:bg-secondary transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50;
-  }
+/* Dangling ornament swing */
+@keyframes swing {
+  0%, 100% { transform: rotate(-8deg); }
+  50% { transform: rotate(8deg); }
 }
 
-/* ===================================================================
-   ANIMATION UTILITIES
-   =================================================================== */
-@layer utilities {
-  /* Gradient Animation */
-  .animate-gradient {
-    background-size: 200% 200%;
-    animation: gradient-shift 8s ease infinite;
-  }
-
-  /* Float Animation */
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
-
-  /* Fade In Animation */
-  .animate-fade-in {
-    animation: fade-in 0.6s ease-out forwards;
-  }
-
-  /* Scale In Animation */
-  .animate-scale-in {
-    animation: scale-in 0.4s ease-out forwards;
-  }
+/* Pulse dot */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.85); }
 }
 
-/* ===================================================================
-   KEYFRAME ANIMATIONS
-   =================================================================== */
-@keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+/* Fade in */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+/* Equalizer bars animation for Now Playing */
+@keyframes eq1 {
+  0%, 100% { height: 6px; }
+  50% { height: 14px; }
+}
+@keyframes eq2 {
+  0%, 100% { height: 12px; }
+  50% { height: 5px; }
+}
+@keyframes eq3 {
+  0%, 100% { height: 8px; }
+  50% { height: 16px; }
 }
 
-@keyframes fade-in {
-  from { 
-    opacity: 0; 
-    transform: translateY(20px); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translateY(0px); 
-  }
+.eq-bar-1 { animation: eq1 0.8s ease-in-out infinite; }
+.eq-bar-2 { animation: eq2 0.6s ease-in-out infinite; }
+.eq-bar-3 { animation: eq3 1s ease-in-out infinite; }
+
+.animate-swing {
+  animation: swing 2s ease-in-out infinite;
+  transform-origin: top center;
 }
 
-@keyframes scale-in {
-  from { 
-    opacity: 0; 
-    transform: scale(0.95); 
-  }
-  to { 
-    opacity: 1; 
-    transform: scale(1); 
-  }
+.animate-pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Highlighted text */
+.highlight {
+  background-color: #f5c518;
+  color: #1a1a1a;
+  padding: 0 4px;
+  border-radius: 2px;
+}
+
+/* Skill pill tags */
+.skill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border: 1px solid #c0b89a;
+  border-radius: 3px;
+  font-size: 13px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #333;
+  background: transparent;
+  white-space: nowrap;
+}
+
+/* Dock nav */
+.dock-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 36px;
+  padding: 14px 0 18px;
+  background: #f0ead6;
+  border-top: 1px solid #d4c9a8;
+  z-index: 100;
+}
+
+/* Page layout */
+.page-layout {
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 0 28px 110px;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Top header bar */
+.top-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0 12px;
+  border-bottom: 1px solid #c0b89a;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+/* Right vertical line with ornament */
+.right-ornament {
+  position: fixed;
+  right: 36px;
+  top: 0;
+  bottom: 80px;
+  width: 1px;
+  background: #c0b89a;
+  z-index: 10;
+}
+
+.right-ornament-dot {
+  position: fixed;
+  right: 29px;
+  top: 52px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid #c0b89a;
+  background: #f0ead6;
+  z-index: 11;
+}
+
+/* Contact link rows */
+.contact-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid #d4c9a8;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.contact-row:hover {
+  opacity: 0.55;
+}
+
+/* Work/project item */
+.work-item {
+  padding: 22px 0;
+  border-bottom: 1px solid #d4c9a8;
+}
+
+.work-item:last-child {
+  border-bottom: none;
 }
