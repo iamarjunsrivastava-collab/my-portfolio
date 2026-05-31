@@ -3,6 +3,29 @@ import { useLocation, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, FolderOpen, GraduationCap, Briefcase, Wifi, Star, Award } from "lucide-react";
 
+// ── Bulb icon SVG ──────────────────────────────────────────────────
+function BulbIcon({ on }: { on: boolean }) {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={on ? "#c9a227" : "#888"}
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      {/* Bulb glass */}
+      <path d="M9 21h6M12 3a6 6 0 0 1 6 6c0 2.4-1.3 4.5-3 5.7V17a1 1 0 0 1-1 1H10a1 1 0 0 1-1-1v-2.3C7.3 13.5 6 11.4 6 9a6 6 0 0 1 6-6z" />
+      {/* Filament glow when on */}
+      {on && (
+        <path d="M10 14.5c.6-.8 1-1.7 1-2.5M14 14.5c-.6-.8-1-1.7-1-2.5" stroke="#c9a227" strokeWidth="1.2" />
+      )}
+    </svg>
+  );
+}
+
 // ── Glitch name component ──────────────────────────────────────────
 const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&";
 
@@ -29,7 +52,6 @@ function GlitchName() {
         return;
       }
 
-      // Gradually restore from left as time passes
       const restored = Math.floor(progress * original.length);
       const scrambled = original
         .split("")
@@ -61,11 +83,10 @@ function LiveClock() {
   useEffect(() => {
     const update = () => {
       const now = new Date();
-      const h = now.getHours().toString().padStart(2, "0");
-      const m = now.getMinutes().toString().padStart(2, "0");
-      const s = now.getSeconds().toString().padStart(2, "0");
       const ampm = now.getHours() >= 12 ? "pm" : "am";
       const h12 = (now.getHours() % 12 || 12).toString().padStart(2, "0");
+      const m = now.getMinutes().toString().padStart(2, "0");
+      const s = now.getSeconds().toString().padStart(2, "0");
       setTime(`${h12}:${m}:${s} ${ampm} IST`);
     };
     update();
@@ -74,7 +95,7 @@ function LiveClock() {
   }, []);
 
   return (
-    <span className="text-xs font-mono" style={{ color: "#666" }}>
+    <span className="text-xs font-mono" style={{ color: "var(--text-muted)" }}>
       {time}
     </span>
   );
@@ -106,9 +127,20 @@ const navItems = [
 export default function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const section = sectionLabels[location.pathname] ?? "";
+  const [dark, setDark] = useState(false);
+
+  // Apply dark class to <html>
+  useEffect(() => {
+    const html = document.documentElement;
+    if (dark) {
+      html.setAttribute("data-theme", "dark");
+    } else {
+      html.removeAttribute("data-theme");
+    }
+  }, [dark]);
 
   return (
-    <div style={{ background: "#f0ead6", minHeight: "100vh" }}>
+    <div style={{ background: "var(--bg)", minHeight: "100vh", transition: "background 0.3s, color 0.3s" }}>
       {/* Right vertical ornament line */}
       <div className="right-ornament" />
       <div className="right-ornament-dot animate-swing" />
@@ -121,20 +153,38 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <GlitchName />
             {section && (
               <>
-                <span className="text-xs" style={{ color: "#999" }}>/</span>
-                <span
-                  className="text-xs font-mono"
-                  style={{ color: "#c9a227" }}
-                >
+                <span className="text-xs" style={{ color: "var(--text-muted)" }}>/</span>
+                <span className="text-xs font-mono" style={{ color: "#c9a227" }}>
                   {section}
                 </span>
               </>
             )}
           </div>
 
-          <div className="flex items-center gap-2">
-            {/* Arrow icon */}
-            <span className="text-xs" style={{ color: "#999" }}>↳</span>
+          <div className="flex items-center gap-2.5">
+            {/* Bulb theme toggle */}
+            <button
+              onClick={() => setDark((d) => !d)}
+              aria-label="Toggle dark mode"
+              title={dark ? "Switch to light" : "Switch to dark"}
+              style={{
+                background: "transparent",
+                border: "none",
+                cursor: "pointer",
+                padding: 2,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                transition: "transform 0.2s",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.2)")}
+              onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+            >
+              <BulbIcon on={dark} />
+            </button>
+
+            {/* Arrow */}
+            <span className="text-xs" style={{ color: "var(--text-muted)" }}>↳</span>
             {/* Yellow dot */}
             <span
               className="animate-pulse-dot inline-block rounded-full"
@@ -144,7 +194,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
 
-        {/* Page content with fade transition */}
+        {/* Page content */}
         <AnimatePresence mode="wait">
           <motion.div
             key={location.pathname}
@@ -167,13 +217,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               key={href}
               to={href}
               aria-label={label}
-              className="flex flex-col items-center gap-0.5 group"
+              className="flex flex-col items-center gap-0.5"
             >
               <div className="relative">
                 <Icon
                   size={20}
                   strokeWidth={active ? 2 : 1.5}
-                  style={{ color: active ? "#c9a227" : "#555" }}
+                  style={{ color: active ? "#c9a227" : "var(--icon-color)" }}
                 />
                 {active && (
                   <span
