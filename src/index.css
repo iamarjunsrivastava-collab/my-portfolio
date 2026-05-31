@@ -189,6 +189,28 @@
   z-index: 11;
 }
 
+/* Hide ornament on mobile — prevents overlap */
+@media (max-width: 640px) {
+  .right-ornament,
+  .right-ornament-dot {
+    display: none;
+  }
+
+  .page-layout {
+    padding: 0 18px 110px;
+  }
+
+  .dock-nav {
+    gap: 22px;
+    padding: 12px 0 16px;
+  }
+
+  .top-header {
+    padding: 12px 0 10px;
+    margin-bottom: 22px;
+  }
+}
+
 /* Contact link rows */
 .contact-row {
   display: flex;

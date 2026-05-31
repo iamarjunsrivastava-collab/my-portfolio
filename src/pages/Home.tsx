@@ -86,29 +86,31 @@ export default function Home() {
       </p>
 
       {/* Open to work line */}
-      <p className="mb-7 flex items-center gap-2 flex-wrap" style={{ fontSize: 15, color: "#1a1a1a" }}>
-        By the way, I'm open to internships and work.{" "}
-        <span style={{ color: "#999" }}>→</span>
-        <a
-          href="mailto:iamarjunsrivastava@gmail.com"
-          className="inline-flex items-center justify-center rounded-full border"
-          style={{ width: 26, height: 26, borderColor: "#c0b89a", color: "#555" }}
-          aria-label="Email"
-        >
-          <Mail size={13} />
-        </a>
-        <span style={{ color: "#bbb" }}>/</span>
-        <a
-          href="https://www.linkedin.com/in/arjun-srivastava-228021282/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center rounded-full border"
-          style={{ width: 26, height: 26, borderColor: "#c0b89a", color: "#555" }}
-          aria-label="LinkedIn"
-        >
-          <Linkedin size={13} />
-        </a>
-      </p>
+      <div className="mb-7" style={{ fontSize: 15, color: "#1a1a1a" }}>
+        <span>By the way, I'm open to internships and work. </span>
+        <span style={{ color: "#999" }}>→ </span>
+        <span style={{ display: "inline-flex", alignItems: "center", gap: 6, verticalAlign: "middle" }}>
+          <a
+            href="mailto:iamarjunsrivastava@gmail.com"
+            className="inline-flex items-center justify-center rounded-full border"
+            style={{ width: 26, height: 26, borderColor: "#c0b89a", color: "#555" }}
+            aria-label="Email"
+          >
+            <Mail size={13} />
+          </a>
+          <span style={{ color: "#bbb" }}>/</span>
+          <a
+            href="https://www.linkedin.com/in/arjun-srivastava-228021282/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-full border"
+            style={{ width: 26, height: 26, borderColor: "#c0b89a", color: "#555" }}
+            aria-label="LinkedIn"
+          >
+            <Linkedin size={13} />
+          </a>
+        </span>
+      </div>
 
       {/* Skills section */}
       <div>
