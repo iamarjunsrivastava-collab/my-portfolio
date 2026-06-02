@@ -37,45 +37,29 @@ const skills: { name: string; Icon: () => JSX.Element }[] = [
 
 export default function Home() {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.3 }}
-    >
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
       {/* Profile photo */}
       <div className="mb-6">
-        <div
-          style={{
-            width: 80,
-            height: 80,
-            border: "1px solid #c0b89a",
-            overflow: "hidden",
-            background: "#e8e0c8",
-          }}
-        >
+        <div style={{ width: 80, height: 80, border: "1px solid var(--border-color)", overflow: "hidden", background: "var(--bg-card)" }}>
           <img
             src="/profile.jpg"
             alt="Arjun Srivastava"
             style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }}
             onError={(e) => {
-              const t = e.currentTarget;
-              t.style.display = "none";
+              const t = e.currentTarget; t.style.display = "none";
               const p = t.parentElement;
               if (p && !p.querySelector(".av-fb")) {
-                const d = document.createElement("div");
-                d.className = "av-fb";
-                d.style.cssText =
-                  "width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;color:#888;font-family:Arial,sans-serif;";
-                d.textContent = "AS";
-                p.appendChild(d);
+                const d = document.createElement("div"); d.className = "av-fb";
+                d.style.cssText = "width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;color:#888;font-family:Arial,sans-serif;";
+                d.textContent = "AS"; p.appendChild(d);
               }
             }}
           />
         </div>
       </div>
 
-      {/* Intro paragraph */}
-      <p className="mb-5 leading-relaxed" style={{ fontSize: 15, color: "#1a1a1a", maxWidth: 500 }}>
+      {/* Intro */}
+      <p className="mb-5 leading-relaxed" style={{ fontSize: 15, color: "var(--text-main)", maxWidth: 500 }}>
         Hey, I'm Arjun Srivastava, a{" "}
         <span className="highlight">final-year Computer Science undergraduate</span>{" "}
         specializing in Data Science, with internship experience at Infosys and
@@ -85,50 +69,38 @@ export default function Home() {
         Power BI Development.
       </p>
 
-      {/* Open to work line */}
-      <div className="mb-7" style={{ fontSize: 15, color: "#1a1a1a" }}>
+      {/* Open to work */}
+      <div className="mb-7" style={{ fontSize: 15, color: "var(--text-main)" }}>
         <span>By the way, I'm open to internships and work. </span>
-        <span style={{ color: "#999" }}>→ </span>
+        <span style={{ color: "var(--text-muted)" }}>→ </span>
         <span style={{ display: "inline-flex", alignItems: "center", gap: 6, verticalAlign: "middle" }}>
-          <a
-            href="mailto:iamarjunsrivastava@gmail.com"
+          <a href="mailto:iamarjunsrivastava@gmail.com"
             className="inline-flex items-center justify-center rounded-full border"
-            style={{ width: 26, height: 26, borderColor: "#c0b89a", color: "#555" }}
-            aria-label="Email"
-          >
+            style={{ width: 26, height: 26, borderColor: "var(--border-color)", color: "var(--icon-color)" }}
+            aria-label="Email">
             <Mail size={13} />
           </a>
-          <span style={{ color: "#bbb" }}>/</span>
-          <a
-            href="https://www.linkedin.com/in/arjun-srivastava-228021282/"
-            target="_blank"
-            rel="noopener noreferrer"
+          <span style={{ color: "var(--text-faint)" }}>/</span>
+          <a href="https://www.linkedin.com/in/arjun-srivastava-228021282/"
+            target="_blank" rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-full border"
-            style={{ width: 26, height: 26, borderColor: "#c0b89a", color: "#555" }}
-            aria-label="LinkedIn"
-          >
+            style={{ width: 26, height: 26, borderColor: "var(--border-color)", color: "var(--icon-color)" }}
+            aria-label="LinkedIn">
             <Linkedin size={13} />
           </a>
         </span>
       </div>
 
-      {/* Skills section */}
+      {/* Skills */}
       <div>
-        <p className="mb-3 flex items-center gap-2" style={{ fontSize: 14, color: "#555" }}>
+        <p className="mb-3 flex items-center gap-2" style={{ fontSize: 14, color: "var(--text-muted)" }}>
           <span style={{ color: "#c9a227" }}>✦</span>
           <span>Skills and Technologies</span>
         </p>
-
         <div className="flex flex-wrap gap-2">
           {skills.map(({ name, Icon }) => (
-            <span
-              key={name}
-              className="skill-tag"
-              style={{ display: "inline-flex", alignItems: "center", gap: 5 }}
-            >
-              <span style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
-                <Icon />
-              </span>
+            <span key={name} className="skill-tag" style={{ display: "inline-flex", alignItems: "center", gap: 5 }}>
+              <span style={{ display: "flex", alignItems: "center", flexShrink: 0 }}><Icon /></span>
               {name}
             </span>
           ))}
