@@ -122,6 +122,79 @@ export default function Contact() {
         <p style={{ fontSize: 15, fontWeight: 700, color: "var(--text-main)", marginBottom: 12 }}>Now Playing ♪</p>
         <NowPlayingWidget />
       </div>
+
+      {/* Footer strip — visitors, open badge, resume */}
+      <div
+        style={{
+          marginTop: 32,
+          paddingTop: 16,
+          borderTop: "1px solid var(--border-light)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          gap: 10,
+        }}
+      >
+        {/* Visitor counter */}
+        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+          <span style={{ fontSize: 13, color: "var(--text-muted)" }}>⇌</span>
+          <img
+            src="https://visitor-badge.laobi.icu/badge?page_id=iamarjunsrivastava-collab.my-portfolio&left_color=gray&right_color=gold&left_text=Visitors"
+            alt="Visitor count"
+            style={{ height: 20, borderRadius: 3 }}
+          />
+        </div>
+
+        {/* Right side: open badge + resume */}
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          {/* Open for internship badge */}
+          <span
+            style={{
+              fontSize: 11,
+              fontWeight: 700,
+              color: "#1a1a1a",
+              background: "#f5c518",
+              padding: "3px 8px",
+              borderRadius: 3,
+              letterSpacing: "0.04em",
+              textTransform: "uppercase",
+            }}
+          >
+            🟢 Open for Internship
+          </span>
+
+          {/* Resume button */}
+          <a
+            href="/resume-arjun.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              fontSize: 12,
+              fontWeight: 600,
+              color: "var(--text-main)",
+              border: "1px solid var(--border-color)",
+              padding: "4px 10px",
+              borderRadius: 3,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 5,
+              transition: "opacity 0.15s",
+              textDecoration: "none",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.6")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="12" y1="18" x2="12" y2="12"/>
+              <line x1="9" y1="15" x2="15" y2="15"/>
+            </svg>
+            View Resume
+          </a>
+        </div>
+      </div>
     </motion.div>
   );
 }
